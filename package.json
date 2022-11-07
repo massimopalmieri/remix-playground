@@ -2,8 +2,13 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "build": "remix build",
-    "dev": "remix dev"
+    "build": "run-s build:*",
+    "build:css": "npm run generate:css -- --minify",
+    "build:remix": "remix build",
+    "dev": "run-p dev:*",
+    "dev:css": "npm run generate:css -- --watch",
+    "dev:remix": "cross-env NODE_ENV=development binode -- @remix-run/dev:remix dev",
+    "generate:css": "tailwindcss -i ./styles/app.css -o ./app/styles/tailwind.css"
   },
   "dependencies": {
     "@headlessui/react": "1.7.4",
@@ -62,7 +67,13 @@
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
     "eslint": "^8.15.0",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "@tailwindcss/aspect-ratio": "0.4.2",
+    "@tailwindcss/forms": "0.5.3",
+    "@tailwindcss/line-clamp": "0.4.2",
+    "@tailwindcss/typography": "0.5.7",
+    "prettier-plugin-tailwindcss": "0.1.13",
+    "tailwindcss": "3.2.2"
   },
   "engines": {
     "node": ">=14"
